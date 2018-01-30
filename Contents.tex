@@ -2,15 +2,13 @@
 
 % Generate a table of contents
 \newpage
-\singlespacing
-\tableofcontents
-\doublespacing
+\singlespacing\tableofcontents\doublespacing{}
 
 % Generate a list of Tables and a list of Figures:
 \newpage
-\addcontentsline{toc}{chapter}{LIST OF TABLES}
+\phantomsection\addcontentsline{toc}{chapter}{LIST OF TABLES}
 \listoftables
 
 \newpage
-\addcontentsline{toc}{chapter}{LIST OF FIGURES}
+\phantomsection\addcontentsline{toc}{chapter}{LIST OF FIGURES}
 \listoffigures

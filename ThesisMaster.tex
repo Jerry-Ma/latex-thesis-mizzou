@@ -3,44 +3,47 @@
 
 % PACKAGES
 %**********
-\usepackage{amsmath}		% AMS Math (http://www.ams.org/tex/amslatex.html)
-\usepackage{amssymb}		% AMS Symbols
-\usepackage{amsthm}			% AMS Theorems
-\usepackage{tocloft}		% Format the Table of Contents
-\usepackage{float}			% More float commands
-\usepackage{sectsty}		% Format section and chapter headings
-\usepackage{graphicx}		% Insert images in eps or pdf format
-\usepackage{setspace}		% Line-spacing
+\usepackage{amsmath}        % AMS Math (http://www.ams.org/tex/amslatex.html)
+\usepackage{amssymb}        % AMS Symbols
+\usepackage{amsthm}         % AMS Theorems
+\usepackage{tocloft}        % Format the Table of Contents
+\usepackage{float}          % More float commands
+\usepackage{sectsty}        % Format section and chapter headings
+\usepackage{graphicx}       % Insert images in eps or pdf format
+\usepackage{setspace}       % Line-spacing
+\usepackage{booktabs}
+\usepackage[colorlinks,linktocpage]{hyperref}
 
 % Potentially useful packages:
-% \usepackage{epsfig}			% For EPS figures
-% \usepackage{subfigure}		% For side-by-side figures
-% \usepackage{sidecap}		% Put captions on the side of figures
-% \usepackage{rotating}		% Rotatiion of figures and tables
-% \usepackage{multirow}		% Column and row spanning in tables
-% \usepackage{chapterbib}		% Insert bibliograhpy with a simple include command
+% \usepackage{epsfig}           % For EPS figures
+% \usepackage{subfigure}        % For side-by-side figures
+% \usepackage{sidecap}      % Put captions on the side of figures
+% \usepackage{rotating}     % Rotatiion of figures and tables
+% \usepackage{multirow}     % Column and row spanning in tables
+% \usepackage{chapterbib}       % Insert bibliograhpy with a simple include command
 
-\input{Command_Mods}	% Lots of special formatting to make the ToC adhere to MU requirements
+\input{Command_Mods}    % Lots of special formatting to make the ToC adhere to MU requirements
+\input{Commands}  % additional commands may be defined in this file
 
 \begin{document}
 
-\doublespacing % Double line-spacing ( or specify something like \setspacing{1.8} )
+\doublespacing{} % Double line-spacing ( or specify something like \setspacing{1.8} )
 \allsectionsfont{\singlespacing} % Only body text needs double spacing, titles can be single spaced
 
-\setcounter{page}{1}    
+\setcounter{page}{1}
 \pagenumbering{roman}
 
-\input{TitlePage}	% Input the Title Page (no page number, but counts as roman numeral 'i')
-\input{Approval}	% Input the Approval Page (no page number)
-\input{Acknowledge}	% Input the Acknowledgement Page (roman numeral page number 'ii')
-\input{Contents}	% Generate and input a Table of Contents and List of Figures/Tables/etc.(roman numeral page number 'iii')
+\input{TitlePage}   % Input the Title Page (no page number, but counts as roman numeral 'i')
+\input{Approval}    % Input the Approval Page (no page number)
+\input{Acknowledge} % Input the Acknowledgement Page (roman numeral page number 'ii')
+\input{Contents}    % Generate and input a Table of Contents and List of Figures/Tables/etc.(roman numeral page number 'iii')
 
 \input{Abstract}
 
 \newpage
 \setcounter{page}{1}
 \pagenumbering{arabic}
-\addtocontents{toc}{\protect \contentsline {chapter}{CHAPTER}{}}
+\addtocontents{toc}{\protect\contentsline{chapter}{CHAPTER}{}{}}
 
 \input{Introduction}
 \input{Chapter_02}
