@@ -3,6 +3,32 @@
 %% specific macros
 
 %% Commands from aastex.cls:
+\def\mdash{---}
+\def\ndash{-}
+% \newcommand{\dagger}{\ensuremath{\dagger}}
+% \newcommand{\Dagger}{\ensuremath{\ddagger}}
+
+\def\tabletypesize#1{\gdef\currtabletypesize{#1}
+\def\@table@type@size{#1}}%
+
+\tabletypesize{\small}
+\let\tablefontsize=\tabletypesize % for compatibility with old documents
+
+\gdef\@tablecaption{}
+\def\tablecaption#1{\gdef\@tablecaption{#1}}
+
+
+\global\def\tablenotemark#1{{\normalfont\textsuperscript{#1}}}
+\global\def\tablenotetext#1#2{\footnotetext[#1]{\currtabletypesize\relax#2}}
+
+%% redefined by AH below, since it wasn't working with tabular table
+\global\def\tablenotetext#1#2{\vskip-8pt\vskip1sp\flushleft{\currtabletypesize
+\noindent\hskip1em $^{#1}$ #2}\vskip1sp}
+
+\def\tablecomments#1{{\small\vskip3pt\indent\vrule height 11pt depth 2pt
+width 0pt\currtabletypesize{\sc Note}---{#1}\vskip1sp}}
+
+
 
 % This has been redefined below
 %\newcommand\dataset{\@testopt\@dataset{[}}%
@@ -115,8 +141,8 @@
 \fi\fi\fi\fi\fi\fi
 \rmfamily\@Roman{#2}}\relax}% 
 
-\renewcommand\case[2]{\mbox{$\frac{#1}{#2}$}}% 
-\renewcommand\slantfrac{\case}% 
+\newcommand\case[2]{\mbox{$\frac{#1}{#2}$}}% 
+\newcommand\slantfrac{\case}% 
 \newcommand\onehalf{\slantfrac{1}{2}}% 
 \newcommand\onethird{\slantfrac{1}{3}}% 
 \newcommand\twothirds{\slantfrac{2}{3}}% 
@@ -125,12 +151,12 @@
 \newcommand\ubvr{\mbox{$U\!BV\!R$}}%% UBVR system 
 \newcommand\ub{\mbox{$U\!-\!B$}}%   % U-B 
 \newcommand\bv{\mbox{$B\!-\!V$}}%   % B-V 
-\renewcommand\vr{\mbox{$V\!-\!R$}}%   % V-R ++
+\newcommand\vr{\mbox{$V\!-\!R$}}%   % V-R ++
 \newcommand\ur{\mbox{$U\!-\!R$}}%   % U-R 
 
-%% need this change so that it works correctly in tables:
-{\catcode`\$=\active
-\gdef\nodata{ ~$\cdots$~ }}% 
+% %% need this change so that it works correctly in tables:
+% {\catcode`\$=\active
+% \gdef\nodata{ ~$\cdots$~ }}% 
 
 \newcommand\diameter{\ooalign{\hfil/\hfil\crcr\mathhexbox20D}}% 
 \newcommand\degr{\arcdeg}% 
@@ -210,10 +236,10 @@
 \def\ref@jnl#1{{\jnl@style#1}}% 
 \newcommand\aj{\ref@jnl{AJ}}%        % Astronomical Journal 
 \newcommand\araa{\ref@jnl{ARA\&A}}%  % Annual Review of Astron and Astrophys 
-\renewcommand\apj{\ref@jnl{ApJ}}%    % Astrophysical Journal ++
+\newcommand\apj{\ref@jnl{ApJ}}%    % Astrophysical Journal ++
 \newcommand\apjl{\ref@jnl{ApJL}}     % Astrophysical Journal, Letters 
 \newcommand\apjs{\ref@jnl{ApJS}}%    % Astrophysical Journal, Supplement 
-\renewcommand\ao{\ref@jnl{ApOpt}}%   % Applied Optics ++
+\newcommand\ao{\ref@jnl{ApOpt}}%   % Applied Optics ++
 \newcommand\apss{\ref@jnl{Ap\&SS}}%  % Astrophysics and Space Science 
 \newcommand\aap{\ref@jnl{A\&A}}%     % Astronomy and Astrophysics 
 \newcommand\aapr{\ref@jnl{A\&A~Rv}}%  % Astronomy and Astrophysics Reviews 
@@ -224,12 +250,12 @@
 \newcommand\jrasc{\ref@jnl{JRASC}}%   % Journal of the RAS of Canada 
 \newcommand\memras{\ref@jnl{MmRAS}}%  % Memoirs of the RAS 
 \newcommand\mnras{\ref@jnl{MNRAS}}%   % Monthly Notices of the RAS 
-\renewcommand\pra{\ref@jnl{PhRvA}}% % Physical Review A: General Physics ++
-\renewcommand\prb{\ref@jnl{PhRvB}}% % Physical Review B: Solid State ++
-\renewcommand\prc{\ref@jnl{PhRvC}}% % Physical Review C ++
-\renewcommand\prd{\ref@jnl{PhRvD}}% % Physical Review D ++
-\renewcommand\pre{\ref@jnl{PhRvE}}% % Physical Review E ++
-\renewcommand\prl{\ref@jnl{PhRvL}}% % Physical Review Letters 
+\newcommand\pra{\ref@jnl{PhRvA}}% % Physical Review A: General Physics ++
+\newcommand\prb{\ref@jnl{PhRvB}}% % Physical Review B: Solid State ++
+\newcommand\prc{\ref@jnl{PhRvC}}% % Physical Review C ++
+\newcommand\prd{\ref@jnl{PhRvD}}% % Physical Review D ++
+\newcommand\pre{\ref@jnl{PhRvE}}% % Physical Review E ++
+\newcommand\prl{\ref@jnl{PhRvL}}% % Physical Review Letters 
 \newcommand\pasp{\ref@jnl{PASP}}%     % Publications of the ASP 
 \newcommand\pasj{\ref@jnl{PASJ}}%     % Publications of the ASJ 
 \newcommand\qjras{\ref@jnl{QJRAS}}%   % Quarterly Journal of the RAS 
@@ -238,7 +264,7 @@
 \newcommand\sovast{\ref@jnl{Soviet~Ast.}}% % Soviet Astronomy 
 \newcommand\ssr{\ref@jnl{SSRv}}% % Space Science Reviews 
 \newcommand\zap{\ref@jnl{ZA}}%       % Zeitschrift fuer Astrophysik 
-\renewcommand\nat{\ref@jnl{Nature}}%  % Nature 
+\newcommand\nat{\ref@jnl{Nature}}%  % Nature 
 \newcommand\iaucirc{\ref@jnl{IAUC}}% % IAU Cirulars 
 \newcommand\aplett{\ref@jnl{Astrophys.~Lett.}}%  % Astrophysics Letters 
 \newcommand\apspr{\ref@jnl{Astrophys.~Space~Phys.~Res.}}% % Astrophysics Space Physics Research 
@@ -246,7 +272,7 @@
 \newcommand\fcp{\ref@jnl{FCPh}}%   % Fundamental Cosmic Physics 
 \newcommand\gca{\ref@jnl{GeoCoA}}% % Geochimica Cosmochimica Acta 
 \newcommand\grl{\ref@jnl{Geophys.~Res.~Lett.}}%  % Geophysics Research Letters 
-\renewcommand\jcp{\ref@jnl{JChPh}}%     % Journal of Chemical Physics 
+\newcommand\jcp{\ref@jnl{JChPh}}%     % Journal of Chemical Physics 
 \newcommand\jgr{\ref@jnl{J.~Geophys.~Res.}}%     % Journal of Geophysics Research 
 \newcommand\jqsrt{\ref@jnl{JQSRT}}%   % Journal of Quantitiative Spectroscopy and Radiative Trasfer 
 \newcommand\memsai{\ref@jnl{MmSAI}}% % Mem. Societa Astronomica Italiana 
